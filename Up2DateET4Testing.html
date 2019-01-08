@@ -323,7 +323,11 @@ slideNavType = type;
   setCopy (0);
 
 
-  function moveForward() {
+  function moveForward(event) {
+    
+    var n =  event.timeStamp;
+    console.log(n);
+
     var currSlide = index % numSlides;
 
     // Shift the slides
@@ -339,7 +343,11 @@ slideNavType = type;
     eventTracker.nextSlideET();
   }
 
-  function moveBack() {
+  function moveBack(event) {
+    
+    var n =  event.timeStamp;
+    console.log(n);
+
     var currSlide = index % numSlides;
 
     // Shift the slides
