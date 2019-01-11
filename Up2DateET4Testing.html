@@ -143,6 +143,10 @@ var slideCSSClass = "slide";
 var slideNavType = "slideURL";
 var slideClickType = "clickURL";
 
+var timeStamp = Date.now();
+
+console.log(timeStamp); 
+
 //Slide navigation control
 var slidesNum = 5;
 var currentSlide = 1;
@@ -152,13 +156,15 @@ var currentSlide = 1;
 * @param curr - current slide
 * @param type - event type 
 */
-var ETSlideCall = function ETSlideCall(type, curr) {
-var next = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+var ETSlideCall = function ETSlideCall(ts, type, curr) {
+var next = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
 
 var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=slide-" + curr;
 if (next != "") {
 trackingLink += "_" + "slide-" + next;
 }
+trackingLink += "-" + ts;
+
 document.createElement('img').src = trackingLink;
 };
 //Public functions
@@ -173,7 +179,7 @@ currentSlide = 1;
 } else {
 currentSlide++;
 }
-ETSlideCall(slideNavType, prevSlide, currentSlide);
+ETSlideCall(Date.now(), slideNavType, prevSlide, currentSlide);
 },
 
 /*
@@ -186,7 +192,9 @@ currentSlide = slidesNum;
 } else {
 currentSlide--;
 }
-ETSlideCall(slideNavType, prevSlide, currentSlide);
+
+ETSlideCall(Date.now(), slideNavType, prevSlide, currentSlide);
+
 },
 
 /*
