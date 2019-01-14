@@ -179,7 +179,7 @@ currentSlide = 1;
 } else {
 currentSlide++;
 }
-ETSlideCall(Date.now(), slideNavType, prevSlide, currentSlide);
+ETSlideCall(Date(), slideNavType, prevSlide, currentSlide);
 },
 
 /*
@@ -193,7 +193,7 @@ currentSlide = slidesNum;
 currentSlide--;
 }
 
-ETSlideCall(Date.now(), slideNavType, prevSlide, currentSlide);
+ETSlideCall(Date(), slideNavType, prevSlide, currentSlide);
 
 },
 
@@ -228,15 +228,13 @@ generalEventTrack: function generalEventTrack(eventType, eventLocation) {
 var redirectLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
 
 event.preventDefault();
-var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + eventLocation + "-" + Date.now();
+var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + eventLocation + "-" + Date();
 document.createElement('img').src = trackingLink;
 if (redirectLink != "") {
 window.open(redirectLink, '_blank');
 }
 
 },
-
-
 
 setETLink: function setETLink(link) {
 ETLink = link;
