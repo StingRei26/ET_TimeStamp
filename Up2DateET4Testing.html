@@ -143,9 +143,9 @@ var slideCSSClass = "slide";
 var slideNavType = "slideURL";
 var slideClickType = "clickURL";
 
-var timeStamp = Date.now();
+// var timeStamp = Date();
 
-console.log(timeStamp); 
+// console.log(timeStamp); 
 
 //Slide navigation control
 var slidesNum = 5;
@@ -331,11 +331,7 @@ slideNavType = type;
   setCopy (0);
 
 
-  function moveForward(event) {
-    
-    var n =  event.timeStamp;
-    console.log(n);
-
+  function moveForward() {
     var currSlide = index % numSlides;
 
     // Shift the slides
@@ -351,11 +347,8 @@ slideNavType = type;
     eventTracker.nextSlideET();
   }
 
-  function moveBack(event) {
-    
-    var n =  event.timeStamp;
-    console.log(n);
-
+  function moveBack() {
+  
     var currSlide = index % numSlides;
 
     // Shift the slides
