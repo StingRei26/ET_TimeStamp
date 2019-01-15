@@ -161,7 +161,7 @@ var next = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "
 
 // var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=slide-" + curr;
 
-var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_time=";
+var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=";
 
 if (next != "") {
 // trackingLink += "_" + "slide-" + next;
@@ -232,9 +232,9 @@ var redirectLink = arguments.length > 2 && arguments[2] !== undefined ? argument
 
 event.preventDefault();
 
-// var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + eventLocation + "-" + Date();
+// var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + eventLocation;
 
-var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_time=" +"-" + Date();
+var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" +"-" + Date();
 
 
 document.createElement('img').src = trackingLink;
