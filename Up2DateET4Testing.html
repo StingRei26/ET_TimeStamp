@@ -142,6 +142,7 @@ var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid
 var slideCSSClass = "slide";
 var slideNavType = "slideURL";
 var slideClickType = "clickURL";
+ 
 
 // var timeStamp = Date();
 
@@ -166,7 +167,7 @@ var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=";
 if (next != "") {
 // trackingLink += "_" + "slide-" + next;
 }
-trackingLink += "-" + ts;
+trackingLink += ts;
 
 document.createElement('img').src = trackingLink;
 };
@@ -234,7 +235,7 @@ event.preventDefault();
 
 // var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + eventLocation;
 
-var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" +"-" + Date();
+var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + Date();
 
 
 document.createElement('img').src = trackingLink;
