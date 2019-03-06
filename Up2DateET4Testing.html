@@ -130,6 +130,7 @@
 
 <script type="text/javascript">
 
+
 // Native Tracking Code//
 
 "use strict";
@@ -137,15 +138,17 @@
 // Native Tracking Code --------------------------------------------- //
 
 var eventTracker = function () {
-//var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
+var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
 
-var ETLink = parent.postMessage({
+parent.postMessage({
 dfp_creativeid: '%ecid!',
 dfp_orderid: '%ebuy!',
 dfp_viewport: '%%PATTERN:vp%%',
 pageviewid: '%%PATTERN:page_view_id%%',
 dfp_pos: '%%PATTERN:pos%%',
 dfp_prop: '%%PATTERN:prop%%'},
+// dfp_event_type: type,
+// dfp_event_location: curr},
 '*'
 );
 
