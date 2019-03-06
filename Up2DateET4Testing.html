@@ -137,16 +137,21 @@
 // Native Tracking Code --------------------------------------------- //
 
 var eventTracker = function () {
-var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
+//var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
+
+var ETLink = parent.postMessage({
+dfp_creativeid: '%ecid!',
+dfp_orderid: '%ebuy!',
+dfp_viewport: '%%PATTERN:vp%%',
+pageviewid: '%%PATTERN:page_view_id%%',
+dfp_pos: '%%PATTERN:pos%%',
+dfp_prop: '%%PATTERN:prop%%'},
+'*'
+);
 
 var slideCSSClass = "slide";
 var slideNavType = "slideURL";
 var slideClickType = "clickURL";
- 
-
-// var timeStamp = Date();
-
-// console.log(timeStamp); 
 
 //Slide navigation control
 var slidesNum = 5;
@@ -157,18 +162,13 @@ var currentSlide = 1;
 * @param curr - current slide
 * @param type - event type 
 */
-var ETSlideCall = function ETSlideCall(ts, type, curr) {
-var next = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : "";
+var ETSlideCall = function ETSlideCall(type, curr) {
+var next = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
 
-// var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=slide-" + curr;
-
-var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=";
-
+var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=slide-" + curr;
 if (next != "") {
-// trackingLink += "_" + "slide-" + next;
+trackingLink += "_" + "slide-" + next;
 }
-trackingLink += ts;
-
 document.createElement('img').src = trackingLink;
 };
 //Public functions
@@ -183,7 +183,7 @@ currentSlide = 1;
 } else {
 currentSlide++;
 }
-ETSlideCall(Date(), slideNavType, prevSlide, currentSlide);
+ETSlideCall(slideNavType, prevSlide, currentSlide);
 },
 
 /*
@@ -196,9 +196,7 @@ currentSlide = slidesNum;
 } else {
 currentSlide--;
 }
-
-ETSlideCall(Date(), slideNavType, prevSlide, currentSlide);
-
+ETSlideCall(slideNavType, prevSlide, currentSlide);
 },
 
 /*
@@ -232,18 +230,13 @@ generalEventTrack: function generalEventTrack(eventType, eventLocation) {
 var redirectLink = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
 
 event.preventDefault();
-
-// var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + eventLocation;
-
-var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + Date();
-
-
+var trackingLink = ETLink + "&dfp_event_type=" + eventType + "&dfp_event_location=" + eventLocation;
 document.createElement('img').src = trackingLink;
 if (redirectLink != "") {
 window.open(redirectLink, '_blank');
 }
-
 },
+
 
 setETLink: function setETLink(link) {
 ETLink = link;
@@ -264,8 +257,7 @@ slideNavType = type;
 }();
 
 
-// End of Native Tracking Code // 
-
+// End of Native Tracking Code --------------------------------------------- // 
 
 (function() {
 
@@ -490,6 +482,7 @@ if (toggleGradient > 0) {
 <div id="impression-pixel-2" class="impression-tracker">
   <img src="[%ImpressionPixel2%]" width="1" height="1" border="0" />
 </div>
+
 <script type="text/javascript">
 parent.postMessage({exclusive: [%Exclusivity%], type: '[%ExclusivityType%]', div:'%%PATTERN:div%%'},'*');
 </script>
