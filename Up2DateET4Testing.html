@@ -130,17 +130,28 @@
 
 <script type="text/javascript">
 
+console.log("testing"); 
+
+function receiveMessage(event)
+{
+  console.log(event); 
+  // if (event.origin !== "https://tpc.googlesyndication.com") {return;} else { console.log(event); }
+}
+
+window.addEventListener("message", receiveMessage, false);
 
 // Native Tracking Code//
+
+
 
 "use strict";
 
 // Native Tracking Code --------------------------------------------- //
 
 var eventTracker = function () {
-var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
+// var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
 
-parent.postMessage({
+window.parent.postMessage({
 dfp_creativeid: '%ecid!',
 dfp_orderid: '%ebuy!',
 dfp_viewport: '%%PATTERN:vp%%',
@@ -154,7 +165,7 @@ dfp_event_location: curr},
 
 var slideCSSClass = "slide";
 var slideNavType = "slideURL";
-var slideClickType = "clickURL";
+var slideClickType = "clickURL"
 
 //Slide navigation control
 var slidesNum = 5;
@@ -167,6 +178,7 @@ var currentSlide = 1;
 */
 var ETSlideCall = function ETSlideCall(type, curr) {
 var next = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "";
+
 
 var trackingLink = ETLink + "&dfp_event_type=" + type + "&dfp_event_location=slide-" + curr;
 if (next != "") {
@@ -257,6 +269,7 @@ setSlideNavType: function setSlideNavType(type) {
 slideNavType = type;
 }
 };
+
 }();
 
 
