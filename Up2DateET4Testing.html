@@ -29,7 +29,7 @@
   <div id="flex-frame">
     <div id="media-well">
       <div class="media-content-well">
-		<img onclick="eventTracker.generalEventTrack('clickURL', 'logo', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" id="logographics2" class="" src="https://www.nytimes.com/files/2018/interactive/election-notifications/logo.png" />
+		<img onclick="eventTracker.generalEventTrack('clickURL', 'logo', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" id="logographics2" class="" src="" />
 
         <div class="media-content">
           
@@ -78,7 +78,7 @@
 
     <div id="content-container">
       <a class="click-target" target="_blank" href="%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%"></a>
-      <img onclick="eventTracker.generalEventTrack('clickURL', 'logo', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" id = "logographics" class="logo" src="https://www.nytimes.com/files/2018/interactive/election-notifications/logo.png"/>
+      <img onclick="eventTracker.generalEventTrack('clickURL', 'logo', '%%CLICK_URL_UNESC%%%%DEST_URL_UNESC%%')" id = "logographics" class="logo" src=""/>
         <div class="content-well">
         
         <div id="slideheadline" class="title"></div>
@@ -130,38 +130,25 @@
 
 <script type="text/javascript">
 
-console.log("testing"); 
 
-function receiveMessage(event)
-{
-  console.log(event); 
-  // if (event.origin !== "https://tpc.googlesyndication.com") {return;} else { console.log(event); }
-}
 
-window.addEventListener("message", receiveMessage, false);
+
+// function receiveMessage(event)
+// {
+//   console.log(event); 
+//   // if (event.origin !== "https://tpc.googlesyndication.com") {return;} else { console.log(event); }
+// }
+
+// window.addEventListener("message", receiveMessage, false);
 
 // Native Tracking Code//
-
-
 
 "use strict";
 
 // Native Tracking Code --------------------------------------------- //
 
 var eventTracker = function () {
-// var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
-
-window.parent.postMessage({
-dfp_creativeid: '%ecid!',
-dfp_orderid: '%ebuy!',
-dfp_viewport: '%%PATTERN:vp%%',
-pageviewid: '%%PATTERN:page_view_id%%',
-dfp_pos: '%%PATTERN:pos%%',
-dfp_prop: '%%PATTERN:prop%%',
-dfp_event_type: type,
-dfp_event_location: curr},
-'*'
-);
+var ETLink = "https://et.nytimes.com/?subject=dfp-ad-events&dfp_creativeid=%ecid!&dfp_lineitemid=%eaid!&dfp_orderid=%ebuy!&dfp_viewport=%%PATTERN:vp%%&pageviewid=%%PATTERN:page_view_id%%&dfp_pos=%%PATTERN:pos%%&dfp_prop=%%PATTERN:prop%%";
 
 var slideCSSClass = "slide";
 var slideNavType = "slideURL";
@@ -185,7 +172,23 @@ if (next != "") {
 trackingLink += "_" + "slide-" + next;
 }
 document.createElement('img').src = trackingLink;
+
+parent.postMessage({
+dfp_creativeid: '%ecid!',
+dfp_orderid: '%ebuy!',
+dfp_viewport: '%%PATTERN:vp%%',
+pageviewid: '%%PATTERN:page_view_id%%',
+dfp_pos: '%%PATTERN:pos%%',
+dfp_prop: '%%PATTERN:prop%%',
+dfp_event_type: type,
+dfp_event_location: curr},
+'https://www.nytimes.com/',
+console.log("postM " + type),
+console.log("postM " + "slide " + curr)
+);
+
 };
+
 //Public functions
 return {
 /*
@@ -250,8 +253,22 @@ document.createElement('img').src = trackingLink;
 if (redirectLink != "") {
 window.open(redirectLink, '_blank');
 }
-},
 
+parent.postMessage({
+dfp_creativeid: '%ecid!',
+dfp_orderid: '%ebuy!',
+dfp_viewport: '%%PATTERN:vp%%',
+pageviewid: '%%PATTERN:page_view_id%%',
+dfp_pos: '%%PATTERN:pos%%',
+dfp_prop: '%%PATTERN:prop%%',
+dfp_event_type: eventType,
+dfp_event_location: eventLocation},
+'https://www.nytimes.com/',
+console.log("postM " + eventType), 
+console.log("postM " + eventLocation)
+);
+
+},
 
 setETLink: function setETLink(link) {
 ETLink = link;
@@ -271,7 +288,6 @@ slideNavType = type;
 };
 
 }();
-
 
 // End of Native Tracking Code --------------------------------------------- // 
 
